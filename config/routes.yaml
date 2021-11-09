@@ -13,6 +13,10 @@ category:
    path: /category
    controller: App\Controller\CategoryController::index  
 
-Comment:
-   path: /category
-   controller: App\Controller\CommentController::index       
+comment:
+   path: /article/comment/{articleId}
+   controller: App\Controller\ArticleController::preview      
+
+addcomment:
+   path: /article/comment/add/{articleId}
+   controller: App\Controller\CommentController::add          

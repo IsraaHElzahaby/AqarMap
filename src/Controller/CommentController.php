@@ -10,20 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use DateTime;
 class CommentController extends ApiController
 {
-    // to list all articles ordered by creation date
-    public function index(CommentRepository $commentRepository)
-    {
-
-        $articleData = $commentRepository->findArticle();
-        return $this->respond($articleData);
-    }
+    
 
     /**
-    * @Route("/article/add", methods="POST")
+    * @Route("/article/comment/add/{articleId}", methods="POST")
     */
-    public function add(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em)
+    public function add(Request $request, CommentRepository $commentRepository, EntityManagerInterface $em)
     {
-        // $request = $this->transformJsonBody($request);
 
         if (! $request) {
             return $this->respondValidationError('Please provide a valid request!');
@@ -32,17 +25,16 @@ class CommentController extends ApiController
         $data = json_decode($request->getContent(), true);
 
         // validate the request data
-        if ($data['title'] && $data['description'] && $data['categoryId']) {
-            // persist the new article
-            $article = new Article;
-            $article->setTitle($data['title'] );
-            $article->setDescription($data['description']);
-            $article->setCategoryId($data['categoryId']);
-            $article->setCreationDate(new DateTime('NOW'));
-            $em->persist($article);
+        if ($data['comment'] && $data['articleId']) {
+            // persist the new comment
+            $comment = new Comment;
+            $comment->setComment($data['comment'] );
+            $comment->setArticle($data['articleId'] );
+            $comment->setCreationDate(new DateTime('NOW'));
+            $em->persist($comment);
             $em->flush();
 
-            return $this->respondCreated($articleRepository->get($article));
+            return $this->respondCreated($comment);
         }else{
             return $this->respondValidationError('Please fill all required data!');
         }

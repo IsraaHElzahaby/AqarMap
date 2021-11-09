@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,5 +50,23 @@ class ArticleController extends ApiController
         }
 
         
+    }
+
+    // to list all article title and comments 
+    public function preview(Request $request, ArticleRepository $articleRepository,CommentRepository $commentRepository)
+    {
+        if (! $request) {
+            return $this->respondValidationError('Please provide a valid request!');
+        }
+
+        $article = $articleRepository->findOneById($request->get('articleId'));
+        if(!is_null($article)){
+            $comments =  $commentRepository->findByArticleField($request->get('articleId'));
+            return $this->respond(['article' =>$article,'comments'=>$comments]);
+
+        }else{
+            return $this->respondValidationError('article not found');
+
+        }
     }
 }

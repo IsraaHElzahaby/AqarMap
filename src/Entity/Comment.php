@@ -26,7 +26,11 @@ class Comment
      * @ORM\Column(type="integer")
      */
     
-    private $article_id;
+    private $article;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creation_date;
 
     public function getId(): ?int
     {
@@ -38,21 +42,34 @@ class Comment
         return $this->comment;
     }
 
-    public function setComment(string $cimment): self
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
 
         return $this;
     }
 
-    public function getArticleId(): ?int
+    public function getArticle(): ?int
     {
-        return $this->article_id;
+        return $this->article;
     }
 
-    public function setArticleId(int $article_id): self
+    public function setArticle(int $article): self
     {
-        $this->article_id = $article_id;
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creation_date;
+        
+    }
+
+    public function setCreationDate(\DateTimeInterface $creation_date): self
+    {
+        $this->creation_date = $creation_date;
 
         return $this;
     }
