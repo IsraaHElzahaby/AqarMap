@@ -1,21 +1,21 @@
 <?php
 namespace App\Controller;
-use App\Entity\Article;
-use App\Repository\ArticleRepository;
+use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use DateTime;
-class ArticleController extends ApiController
+class CommentController extends ApiController
 {
     // to list all articles ordered by creation date
-    public function index(ArticleRepository $articleRepository)
+    public function index(CommentRepository $commentRepository)
     {
 
-        $blogs = $articleRepository->getAll();
-        return $this->respond($blogs);
+        $articleData = $commentRepository->findArticle();
+        return $this->respond($articleData);
     }
 
     /**

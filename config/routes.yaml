@@ -1,3 +1,18 @@
 article:
    path: /article/list
    controller: App\Controller\ArticleController::index
+addarticle:
+   path: /article/add
+   controller: App\Controller\ArticleController::add
+
+dashboard:
+   path: /dashboard
+   controller: App\Controller\DashboardController::index 
+
+category:
+   path: /category
+   controller: App\Controller\CategoryController::index  
+
+Comment:
+   path: /category
+   controller: App\Controller\CommentController::index       

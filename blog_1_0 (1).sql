@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 08, 2021 at 01:24 PM
+-- Generation Time: Nov 09, 2021 at 03:28 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -24,21 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_account`
---
-
-DROP TABLE IF EXISTS `admin_account`;
-CREATE TABLE IF NOT EXISTS `admin_account` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `article`
 --
 
@@ -49,9 +34,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_category_categoryid` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `article`
@@ -59,7 +43,16 @@ CREATE TABLE IF NOT EXISTS `article` (
 
 INSERT INTO `article` (`id`, `title`, `description`, `creation_date`, `category_id`) VALUES
 (1, 'Article 1 ', 'Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 Article 1 ', '2021-11-11 13:07:50', 1),
-(2, 'Article 2', 'Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2', '2021-11-25 13:08:13', 2);
+(2, 'Article 2', 'Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2Article 2', '2021-11-25 13:08:13', 2),
+(3, 'dc', 'cd', '2021-11-09 14:25:51', 1),
+(4, 'dsssssss', 'dssssss', '2021-11-09 14:27:11', 2),
+(5, 'sssssss', 'sd', '2021-11-09 14:32:02', 1),
+(6, 'sdddddddddddddd', 'dddddddddd', '2021-11-09 14:43:58', 1),
+(7, 'sdddddddddddddd', 'dddddddddd', '2021-11-09 14:44:27', 1),
+(8, 'sdddddddddddddd', 'dddddddddd', '2021-11-09 14:44:51', 1),
+(9, 'sddddddddd', 'ds', '2021-11-09 14:45:53', 2),
+(10, 'sddddddddd', 'ds', '2021-11-09 14:47:07', 2),
+(11, 'tes', 'sss', '2021-11-09 15:07:47', 2);
 
 -- --------------------------------------------------------
 
@@ -71,7 +64,6 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -79,9 +71,23 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `category_key`) VALUES
-(1, 'Review article', 'review_article'),
-(2, 'Clinical trial:', 'clinical_trial:');
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Review article'),
+(2, 'Clinical trial');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `article_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -105,17 +111,36 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20211107144917', '2021-11-07 14:49:53', 86),
 ('DoctrineMigrations\\Version20211108075557', '2021-11-08 07:56:08', 197),
 ('DoctrineMigrations\\Version20211108101340', '2021-11-08 10:13:51', 125),
-('DoctrineMigrations\\Version20211108105148', '2021-11-08 10:51:57', 247);
+('DoctrineMigrations\\Version20211108105148', '2021-11-08 10:51:57', 247),
+('DoctrineMigrations\\Version20211109094451', '2021-11-09 09:45:13', 207),
+('DoctrineMigrations\\Version20211109105709', '2021-11-09 10:57:18', 106),
+('DoctrineMigrations\\Version20211109152136', '2021-11-09 15:21:45', 215),
+('DoctrineMigrations\\Version20211109152228', '2021-11-09 15:22:36', 72),
+('DoctrineMigrations\\Version20211109152656', '2021-11-09 15:27:02', 230),
+('DoctrineMigrations\\Version20211109152752', '2021-11-09 15:28:03', 137);
+
+-- --------------------------------------------------------
 
 --
--- Constraints for dumped tables
+-- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(180) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `roles` json NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
 --
--- Constraints for table `article`
+-- Dumping data for table `user`
 --
-ALTER TABLE `article`
-  ADD CONSTRAINT `FK_category_categoryid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO `user` (`id`, `email`, `password`, `roles`) VALUES
+(1, 'esraaelzahaby40@gmail.com', '$2y$13$.4lJTY4vyAh3bDIySVpYXOC8RgmClLLRBsNiJS.qh05C/dGcSkAj.', '[]');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

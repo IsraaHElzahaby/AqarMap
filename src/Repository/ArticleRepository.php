@@ -27,6 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
                 'id'    => (int) $article->getId(),
                 'title' => (string) $article->getTitle(),
                 'description' => (string) $article->getDescription(),
+                'category_id' => (string) $article->getCategoryId(),
                 'creation_date' => $article->getCreationDate(),
                 
         ];

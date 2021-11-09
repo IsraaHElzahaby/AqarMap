@@ -22,13 +22,6 @@ class Category
      */
     private $name;
 
-    
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category_key;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -42,19 +35,6 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    
-    public function getCategoryKey(): ?string
-    {
-        return $this->category_key;
-    }
-
-    public function setCategoryKey(string $category_key): self
-    {
-        $this->category_key = $category_key;
 
         return $this;
     }
