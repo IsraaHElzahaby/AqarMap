@@ -1,0 +1,47 @@
+<?php
+namespace App\Tests\Controller\Api;
+use DateTime;
+
+class ArticleControllerTest extends \PHPUnit_Framework_TestCase
+{
+
+	private $client;
+
+		public function __construct() {
+		    $client = new \GuzzleHttp\Client([
+	            'base_url' => 'http://localhost:8000',
+	            'defaults' => [
+	                'exceptions' => false
+	            ]
+	        ]);
+	}
+    
+    public function testOkList()
+    {
+
+        $response = $client->get('/article/comment/add/1');
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testBodyList(){
+        $response = $client->get('/article/comment/1');
+
+    	$finishedData = json_decode($response->getBody(true), true);
+        $this->assertArrayHasKey('comment', $finishedData);
+    }
+
+    public function testAdd(){
+    	$comment = 'ObjectOrienter'.rand(0, 999);
+        $data = array(
+            'comment' => $title,
+            
+        );
+        // 1) Create a programmer resource
+        $response = $client->post('/article/comment/add/1', [
+            'body' => json_encode($data)
+        ]);
+        $this->assertEquals(200, $response->getStatusCode());
+        
+    }
+    
+}
